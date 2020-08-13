@@ -29,8 +29,7 @@ db_drop_and_create_all()
 '''
 
 @app.route('/drinks')
-@requires_auth('get:drink')
-def get_drinks(payload):
+def get_drinks():
     drinks = 'DRINKS' #Drink.query.all().short()
     return jsonify({
         "success": True, 
