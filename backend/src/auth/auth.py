@@ -32,7 +32,7 @@ def get_token_auth_header():
 
     split_auth = auth.split(' ')
 
-    if split_auth[0].lower != 'bearer':
+    if split_auth[0].lower() != 'bearer':
         raise AuthError({
             'code': 'invalid_bearer',
             'description': 'Authorization header must start with "Bearer".'
@@ -48,7 +48,8 @@ def get_token_auth_header():
             'description': 'Authorization header is not a bearer token".'
     }, 401)
     
-    return split_auth[1] #token
+    auth_token = split_auth[1]
+    return auth_token
 
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
@@ -100,6 +101,9 @@ def verify_decode_jwt(token):
 
     if rsa_key:
         try:
+            print('!!!!!!!')
+            print(rsa_key)
+            print('!!!!!!!')
             payload = jwt.decode(
                 token,
                 rsa_key,
@@ -107,6 +111,9 @@ def verify_decode_jwt(token):
                 audience=API_AUDIENCE,
                 issuer='https://' + AUTH0_DOMAIN + '/'
             )
+            print('payload')
+            print(payload)
+            print('end')
             return payload
         
         except jwt.ExpiredSignatureError:
@@ -121,7 +128,6 @@ def verify_decode_jwt(token):
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
         except Exception:
-            print('error')
             raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to parse authentication token.'
@@ -137,6 +143,7 @@ def requires_auth(permission=''):
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
             payload = verify_decode_jwt(token)
+           
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 

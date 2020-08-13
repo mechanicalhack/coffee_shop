@@ -30,8 +30,8 @@ db_drop_and_create_all()
 
 @app.route('/drinks')
 @requires_auth('get:drink')
-def get_drinks():
-    drinks = Drink.query.all().short()
+def get_drinks(payload):
+    drinks = 'DRINKS' #Drink.query.all().short()
     return jsonify({
         "success": True, 
         "drinks": drinks
@@ -47,7 +47,14 @@ def get_drinks():
         or appropriate status code indicating reason for failure
 '''
 
-
+@app.route('/drinks-detail')
+@requires_auth('get:drinks-detail')
+def get_drink_details(payload):
+    drinks = 'Drink' #Drink.query.all().short()
+    return jsonify({
+        "success": True, 
+        "drinks": drinks
+    })
 '''
 @TODO implement endpoint
     POST /drinks
@@ -104,10 +111,10 @@ def not_found(error):
                     "message": "not found"
                     }), 404
 
-@app.errorhandler(AuthError)
-def auth_error(error):
-    return jsonify({
-                    "success": False, 
-                    "error": AuthError,
-                    "message": "Authentication Error"
-                    }), AuthError
+# @app.errorhandler(AuthError)
+# def auth_error(error):
+#     return jsonify({
+#                     "success": False, 
+#                     "error": AuthError,
+#                     "message": "Authentication Error"
+#                     }), 401
