@@ -16,7 +16,7 @@ CORS(app)
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 '''
-db_drop_and_create_all()
+# db_drop_and_create_all()
 
 ## ROUTES
 '''
@@ -30,11 +30,16 @@ db_drop_and_create_all()
 
 @app.route('/drinks')
 def get_drinks():
-    drinks = Drink.query.all()
-    shortened_drinks = [drink.short for drink in drinks]
+    all_drinks = Drink.query.all()
+    drinks = {}
+    for drink in all_drinks:
+      drinks[drink.id] = {
+          drink.title,
+          drink.recipe}
+    # shortened_drinks = [drink.short for drink in drinks]
     return jsonify({
         "success": True, 
-        "drinks": shortened_drinks
+        "drinks": drinks
     })
 
 
