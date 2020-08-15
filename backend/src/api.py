@@ -30,10 +30,11 @@ db_drop_and_create_all()
 
 @app.route('/drinks')
 def get_drinks():
-    drinks = 'DRINKS' #Drink.query.all().short()
+    drinks = Drink.query.all()
+    shortened_drinks = [drink.short for drink in drinks]
     return jsonify({
         "success": True, 
-        "drinks": drinks
+        "drinks": shortened_drinks
     })
 
 
@@ -48,11 +49,12 @@ def get_drinks():
 
 @app.route('/drinks-detail')
 @requires_auth('get:drinks-detail')
-def get_drink_details(payload):
-    drinks = 'Drink' #Drink.query.all().short()
+def get_drink_details():
+    drinks = Drink.query.all()
+    drinks_details = [drink.long for drink in drinks]
     return jsonify({
         "success": True, 
-        "drinks": drinks
+        "drinks": drinks_details
     })
 '''
 @TODO implement endpoint
@@ -64,6 +66,28 @@ def get_drink_details(payload):
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/drinks', methods=['POST'])
+# @requires_auth('post:drinks')
+def add_drink():
+    new_drink_info = request.get_json()
+
+    title = new_drink_info.get('title')
+    recipe = new_drink_info.get('recipe')
+    
+    if recipe is None:
+        abort(422)
+    try:
+
+        new_drink = Drink(title = title, recipe = json.dumps(recipe))
+        new_drink.insert()
+
+        return jsonify({
+            "success": True, 
+            "drinks": recipe
+        })
+        
+    except:
+        abort(422)
 
 '''
 @TODO implement endpoint
