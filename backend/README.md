@@ -83,3 +83,8 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+
+## Resources Used to make this site
+
+For converting the json received and putting it into the database and getting it back out again I received help here https://knowledge.udacity.com/questions/131148. I was having trouble finding a solution that would work saving it as a string after doing a lot of research I went to the udacity mentor help page.
