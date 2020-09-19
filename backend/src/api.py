@@ -31,17 +31,9 @@ CORS(app)
 @app.route('/drinks')
 def get_drinks():
     all_drinks = Drink.query.all()
-    # print("all drinks: ")
+    
     drinks = [drink.short() for drink in all_drinks]
-    print(drinks)
-    # drinks = []
-    # for drink in all_drinks:
-    #     drinks.append({
-    #         'title': drink.title,
-    #         'recipe': drink.recipe.short()
-    #     })
 
-    # shortened_drinks = [drink['recipe'].short() for drink in drinks]
     return jsonify({
         "success": True, 
         "drinks": drinks
