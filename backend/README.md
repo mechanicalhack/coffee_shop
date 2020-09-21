@@ -89,4 +89,4 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 For converting the json received and putting it into the database and getting it back out again I received help here https://knowledge.udacity.com/questions/131148. I was having trouble finding a solution that would work saving it as a string after doing a lot of research I went to the udacity mentor help page.
 
-Found help for my Auth Error handler here https://knowledge.udacity.com/questions/124492. I was on the right track but wasn't capturig it right into the 
+Found help for my Auth Error handler here https://knowledge.udacity.com/questions/124492. I was on the right track but wasn't capturing it right into the endpoint
