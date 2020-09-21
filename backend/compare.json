@@ -1,0 +1,26 @@
+{
+    "title": "yucky yucky shake 3",
+    "recipe": [
+        {
+            "name": "yucky",
+            "color": "purple",
+            "parts": 2
+        },
+        {
+            "name": "yucky 2",
+            "color": "pink",
+            "parts": 1
+        }
+    ]
+}
+
+{
+    "title": "Water3",
+    "recipe": [
+        {
+            "name": "Water",
+            "color": "blue",
+            "parts": 1
+        }
+    ]
+}

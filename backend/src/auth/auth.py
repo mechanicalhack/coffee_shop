@@ -101,9 +101,9 @@ def verify_decode_jwt(token):
 
     if rsa_key:
         try:
-            print('!!!!!!!')
-            print(rsa_key)
-            print('!!!!!!!')
+            # print('!!!!!!!')
+            # print(rsa_key)
+            # print('!!!!!!!')
             payload = jwt.decode(
                 token,
                 rsa_key,
@@ -111,9 +111,9 @@ def verify_decode_jwt(token):
                 audience=API_AUDIENCE,
                 issuer='https://' + AUTH0_DOMAIN + '/'
             )
-            print('payload')
-            print(payload)
-            print('end')
+            # print('payload')
+            # print(payload)
+            # print('end')
             return payload
         
         except jwt.ExpiredSignatureError:
@@ -143,7 +143,6 @@ def requires_auth(permission=''):
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
             payload = verify_decode_jwt(token)
-           
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 
