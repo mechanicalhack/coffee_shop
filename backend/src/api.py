@@ -48,12 +48,8 @@ def add_drink(payload):
 
     title = new_drink_info.get('title')
     json_recipe = new_drink_info.get('recipe')
-    print('title')
-    print(title)
-    print('recipe')
-    print(json_recipe)
+
     if json_recipe is None:
-        print('recipe error')
         abort(422)
     try:
 
@@ -66,7 +62,6 @@ def add_drink(payload):
         })
         
     except:
-        print('save error')
         abort(422)
 
 @app.route('/drinks/<int:id>', methods=['PATCH'])
@@ -89,8 +84,6 @@ def patch_drink(payload, id):
     try:
         if title:
             drink_to_patch.title = title
-        
-        print(drink_to_patch.title)
 
         if json_recipe:
             drink_to_patch.recipe = json.dumps(json_recipe)
