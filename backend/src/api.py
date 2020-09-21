@@ -140,5 +140,5 @@ def auth_error(ex):
     return jsonify({
                     "success": False, 
                     "error": 401,
-                    "message": 'Unauthorized'
+                    "message": ex.error
                     }), 401
